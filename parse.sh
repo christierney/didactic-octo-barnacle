@@ -10,3 +10,5 @@ outfile="$(basename "$1" chlsj)csv"
 echo "time,latency,duration,headers,body,X-Cache-CF,X-Cache-Remote,X-Cache" > "$outfile"
 
 ./jq-osx-amd64 -r -f parse.jq "$1" >> "$outfile"
+
+python analyze.py
