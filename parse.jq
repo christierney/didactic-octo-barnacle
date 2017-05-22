@@ -1,3 +1,4 @@
+map(select(.host == "happyon-vod.akamaized.net")) |
 .[] |
 [ .times.requestBegin,
   .durations.latency,
