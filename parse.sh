@@ -11,4 +11,4 @@ echo "time,latency,duration,headers,body,X-Cache-CF,X-Cache-Remote,X-Cache" > "$
 
 ./jq-osx-amd64 -r -f parse.jq "$1" >> "$outfile"
 
-python analyze.py
+python analyze.py "$outfile"
