@@ -19,7 +19,7 @@ def process(input_filename, print_percentages=False):
         try:
             latency = float(row[1])
             duration = float(row[2])
-        except Error:
+        except:
             continue
 
         hit_cf = row[5] == "true"
