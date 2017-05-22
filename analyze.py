@@ -1,14 +1,10 @@
 import csv
 import os
+import sys
 
 # Open csv file
-input_filename = None
+input_filename = sys.argv[1]
 input_dir = os.getcwd()
-for filename in os.listdir(input_dir):
-    if filename.endswith(".csv") and not ("analysis" in filename):
-        input_filename = filename
-        break
-
 input_csv_filename = "{dir}/{name}".format(dir=input_dir, name=input_filename)
 print "Opening " + input_csv_filename
 input_csv = open(input_csv_filename)
@@ -45,7 +41,8 @@ for row in reader:
     info += [str(latency), str(duration)]
     rows.append(info)
 
-output_csv = open("analysis.csv", "w")
+output_filename = os.path.splitext(input_csv_filename)[0] + "-analysis.csv"
+output_csv = open(output_filename, "w")
 output_csv.write(",".join(header)+"\n")
 
 for i in range(0, len(rows)):
