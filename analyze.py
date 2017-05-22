@@ -16,9 +16,11 @@ def process(input_filename, print_percentages=False):
     for row in reader:
         if "time" in row[0]:
             continue
-
-        latency = float(row[1])
-        duration = float(row[2])
+        try:
+            latency = float(row[1])
+            duration = float(row[2])
+        except Error:
+            continue
 
         hit_cf = row[5] == "true"
         hit_xr = row[6] == "true"
