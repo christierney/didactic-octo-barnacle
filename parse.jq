@@ -4,9 +4,11 @@
   .durations.total, 
   .response.sizes.headers, 
   .response.sizes.body, 
-  (.response.header.headers | .[]? | select (.name == "X-Cache-CF") | .value),
-  (.response.header.headers | .[]? | select (.name == "X-Cache") | .value ),
-  (.response.header.headers | .[]? | select (.name == "X-Cache-Remote") | .value)
+  (.response.header.headers | map({(.name): .value}) | add |
+    (."X-Cache-CF" | contains("Hit")) and (."X-Cache" | contains("MISS")) and (."X-Cache-Remote" | contains("MISS")?),
+        (."X-Cache-Remote" | contains("HIT")?//false),
+        (."X-Cache" | contains("HIT"))
+  )
 ] |
 @csv
 

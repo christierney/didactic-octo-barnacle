@@ -7,6 +7,6 @@ fi
 
 outfile="$(basename "$1" chlsj)csv"
 
-echo "time,latency,duration,headers,body,X-Cache-CF,X-Cache,X-Cache-Remote" > "$outfile"
+echo "time,latency,duration,headers,body,X-Cache-CF,X-Cache-Remote,X-Cache" > "$outfile"
 
 ./jq-osx-amd64 -r -f parse.jq "$1" >> "$outfile"
